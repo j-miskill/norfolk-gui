@@ -1,2 +1,9 @@
 {% extends "trees/base.html" %}
+{% load static %}
 
+{% block content %}
+
+<script src="{% static 'trees/map.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap&v=weekly" async defer></script>
+
+{% endblock content %}
