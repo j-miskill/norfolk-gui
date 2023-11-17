@@ -11,4 +11,5 @@ def home_view(request):
     return render(request=request, context=context, template_name=template_name)
 
 
-class
+class TreeView(View):
+    template_name = "trees/map.html"
