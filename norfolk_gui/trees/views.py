@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render
 from django.views import View
 
@@ -13,6 +15,7 @@ def home_view(request):
 
 class TreeView(View):
     template_name = "trees/map.html"
-
+    key = os.environ.get("MAPS_KEY")
     def get(self, request):
-        return render(request, self.template_name)
+        context = {"key": self.key}
+        return render(request=request, template_name=self.template_name, context=context)

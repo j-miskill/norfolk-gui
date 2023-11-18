@@ -2,8 +2,9 @@
 {% load static %}
 
 {% block content %}
+<div id="map"></div>
+<link rel="stylesheet" type="text/css" href="{% static 'trees/map.css' %}">
 
-<script src="{% static 'trees/map.js' %}"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap&v=weekly" async defer></script>
-
+<script>initMap()</script>
 {% endblock content %}
