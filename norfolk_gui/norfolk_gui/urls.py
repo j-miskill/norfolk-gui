@@ -20,5 +20,5 @@ from trees import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("home/", include("trees.urls"), name="home"),
+    path("", include("trees.urls"), name="home"),
 ]

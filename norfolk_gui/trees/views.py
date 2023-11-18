@@ -13,3 +13,6 @@ def home_view(request):
 
 class TreeView(View):
     template_name = "trees/map.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
