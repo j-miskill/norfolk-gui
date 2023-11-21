@@ -25,30 +25,43 @@ class TreeView(View):
     def get(self, request):
         context = {"key": self.key}
         tree_data = self.get_tree_data()
-        lat_long_data = self.clean_tree_data(tree_data)
-        context["lat_long_data"] = json.dumps(lat_long_data)
+        final_data = self.clean_tree_data(tree_data.json())
+        context["data"] = {}
+        context['data'] = json.dumps(final_data)
         return render(request=request, template_name=self.template_name, context=context)
 
     def get_tree_data(self):
         data = {}
-        try:
-            data = requests.get("https://data.norfolk.gov/resource/jz6u-9g3c.json")
-            data = data.json()
-        except:
-            raise Exception("Something went wrong")
+        data = requests.get("https://data.norfolk.gov/resource/jz6u-9g3c.json")
         return data
 
-    def clean_tree_data(self, tree_data: dict):
-        lat_long_data = {}
+    def clean_tree_data(self, tree_data):
+        data = {}
         for tree in tree_data:
-            name = tree["id"]
-            lat = tree["latitude"]
-            long = tree["longitude"]
-            lat_long_data[name] = {}
-            lat_long_data[name]["latitude"] = lat
-            lat_long_data[name]["longitude"] = long
+            id = tree['id']
+            data[id] = {"latitude": "",
+                        "longitude": "",
+                        "species": "",
+                        "genus": "",
+                        "id": id}
+            data[id]['latitude'] = tree['latitude']
+            data[id]['longitude'] = tree['longitude']
 
-        return lat_long_data
+            try:
+                data[id]['species'] = tree['species']
+            except:
+                data[id]['species'] = "No species"
+
+            try:
+                data[id]['genus'] = tree['genus']
+            except:
+                data[id]['genus'] = "No genus"
+
+
+
+            # need latitude, longitude, id, species, genus
+
+        return data
 
 
 

@@ -1,19 +1,21 @@
 
 let map;
 async function initMap() {
-    let lat_long_data = document.getElementById("data").value;
-
+    let data = document.getElementById("data").value;
     const { Map } = await google.maps.importLibrary("maps");
     map = new Map(document.getElementById("map"), {
         center: { lat: 36.8477, lng: -76.2951},
         zoom: 15,
     });
 
-    let parsed_data = JSON.parse(lat_long_data);
-    //console.log(parsed_data);
+    let parsed_data = JSON.parse(data);
+
     for (const tree in parsed_data) {
-        //console.log(tree);
+
         const myLatlng = {lat: parseFloat(parsed_data[tree].latitude), lng: parseFloat(parsed_data[tree].longitude)}
+        const species = parsed_data[tree].species;
+        const genus = parsed_data[tree].genus;
+        const id = tree;
         const marker = new google.maps.Marker({
                 position: myLatlng,
                 map: map,
@@ -30,7 +32,8 @@ async function initMap() {
             infoWindow = new google.maps.InfoWindow({
                 position: myLatlng,
             });
-            infoWindow.setContent("content");
+            var displayMessage = "<p>ID: " + id + "</p>" + "<p>Species: " + species + "</p>" + "<p>Genus: " + genus + "</p>";
+            infoWindow.setContent(displayMessage);
             infoWindow.open(map);
         });
     }
