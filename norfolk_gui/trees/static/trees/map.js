@@ -13,10 +13,26 @@ async function initMap() {
     //console.log(parsed_data);
     for (const tree in parsed_data) {
         //console.log(tree);
+        const myLatlng = {lat: parseFloat(parsed_data[tree].latitude), lng: parseFloat(parsed_data[tree].longitude)}
         const marker = new google.maps.Marker({
-                position: {lat: parseFloat(parsed_data[tree].latitude), lng: parseFloat(parsed_data[tree].longitude)},
+                position: myLatlng,
                 map: map,
             });
+        marker.addListener("click", () => {
+
+            // initialize InfoWindow
+            let infoWindow = new google.maps.InfoWindow({
+                content: "Click to get event data",
+                position: myLatlng,
+            });
+
+            // when use clicks, display content
+            infoWindow = new google.maps.InfoWindow({
+                position: myLatlng,
+            });
+            infoWindow.setContent("content");
+            infoWindow.open(map);
+        });
     }
 
 }

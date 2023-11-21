@@ -125,3 +125,4 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MAPS_KEY = os.environ.get("MAPS_KEY")
+TREE_KEY = os.environ.get("TREE_KEY")

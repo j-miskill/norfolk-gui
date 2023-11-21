@@ -5,6 +5,7 @@ from django.views import View
 from sodapy import Socrata
 from pprint import pprint
 import json
+import requests
 
 
 # Create your views here.
@@ -31,9 +32,8 @@ class TreeView(View):
     def get_tree_data(self):
         data = {}
         try:
-            client = Socrata("data.norfolk.gov", app_token=self.tree_key)
-            data = client.get("jz6u-9g3c", limit=471)
-            # pprint(data[0])
+            data = requests.get("https://data.norfolk.gov/resource/jz6u-9g3c.json")
+            data = data.json()
         except:
             raise Exception("Something went wrong")
         return data
