@@ -1,0 +1,15 @@
+Welcome to the Norfolk GUI Project!
+
+This small application was built using Django and the Google Maps Javascript API. It draws on Norfolk, Virginia's
+open source data on significant trees in the city.
+
+I grew up in Norfolk and I wanted to create something that showed some neat aspects of the city.
+
+Users can:
+1. Look at how many neat trees we have
+2. Plan a new adventure to find some neat trees
+3. Explore the fact that Norfolk, Virginia is a really cool place to be.
+4. See a project of a CS student having fun with open source data.
+
+
+Thanks for looking!

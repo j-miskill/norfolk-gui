@@ -14,7 +14,15 @@ import requests
 def home_view(request):
     template_name = "trees/home.html"
     context = {}
+    context['intro'] = get_intro()
     return render(request=request, context=context, template_name=template_name)
+
+def get_intro():
+    print(os.listdir("trees"))
+    f = open("trees/intro.txt", "r")
+    lines = f.readlines()
+    f.close()
+    return lines
 
 
 class TreeView(View):
@@ -30,6 +38,8 @@ class TreeView(View):
         context['data'] = json.dumps(final_data)
         return render(request=request, template_name=self.template_name, context=context)
 
+
+
     def get_tree_data(self):
         data = {}
         data = requests.get("https://data.norfolk.gov/resource/jz6u-9g3c.json")
@@ -43,6 +53,7 @@ class TreeView(View):
                         "longitude": "",
                         "species": "",
                         "genus": "",
+                        "common_name": "",
                         "id": id}
             data[id]['latitude'] = tree['latitude']
             data[id]['longitude'] = tree['longitude']
@@ -57,7 +68,10 @@ class TreeView(View):
             except:
                 data[id]['genus'] = "No genus"
 
-
+            try:
+                data[id]['common_name'] = tree['common_name']
+            except:
+                data[id]['common_name'] = "No common name"
 
             # need latitude, longitude, id, species, genus
 

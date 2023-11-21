@@ -15,6 +15,7 @@ async function initMap() {
         const myLatlng = {lat: parseFloat(parsed_data[tree].latitude), lng: parseFloat(parsed_data[tree].longitude)}
         const species = parsed_data[tree].species;
         const genus = parsed_data[tree].genus;
+        const common_name = parsed_data[tree].common_name;
         const id = tree;
         const marker = new google.maps.Marker({
                 position: myLatlng,
@@ -32,7 +33,7 @@ async function initMap() {
             infoWindow = new google.maps.InfoWindow({
                 position: myLatlng,
             });
-            var displayMessage = "<p>ID: " + id + "</p>" + "<p>Species: " + species + "</p>" + "<p>Genus: " + genus + "</p>";
+            var displayMessage = "<p>ID: " + id + "</p>" + "<p>Species: " + species + "</p>" + "<p>Genus: " + genus + "</p>" + "<p>Common Name: " + common_name + "</p>";
             infoWindow.setContent(displayMessage);
             infoWindow.open(map);
         });

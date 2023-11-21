@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-    {{ hello }}
+
+        {% for line in intro %}
+        <p>{{ line }}</p>
+        {% endfor %}
+
+<a href="{% url "map" %}">See Some Trees</a>
 </body>
 </html>
